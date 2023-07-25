@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
+import LoginContext from "../Context/Login";
 
 function emailHandler(state, action) {
   if (action.type === "USER_INPUT") {
@@ -59,9 +60,11 @@ const Login = (props) => {
     dispatchPassword({ type: "BLUR_FIELD" });
   };
 
+  const log = useContext(LoginContext);
+
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.val, passwordState.val);
+    log.loginHandler(emailState.val, passwordState.val);
   };
 
   return (
